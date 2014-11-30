@@ -4,7 +4,18 @@
 	<input type="text" class="form-control" name="name" value="<%= user.name %>">
 	<input type="text" class="form-control" name="title" value="<%= user.title %>">
 	<input type="text" class="form-control" name="email" value="<%= user.email %>">
-	<input type="submit" class="btn btn-lg btn-primary btn-block" value="Proceed...">
-	<input type="hidden" name="_csrf" value="<%= _csrf %>">
+
+  <% if (session.authenticated && session.User.admin) { %>
+    <% if (user.admin) { %>
+      <input type="hidden" name="admin" value="unchecked">
+      <label class="checkbox"><input type="checkbox" name="admin">Admin</label>
+    <% } else { %>
+      <input type="hidden" name="admin" value="unchecked">
+      <label class="checkbox"><input type="checkbox" name="admin">Admin</label>
+    <% } %>
+  <% } %>
+
+  <input type="submit" class="btn btn-lg btn-primary btn-block" value="Proceed...">
+  <input type="hidden" name="_csrf" value="<%= _csrf %>">
 
 </form>
